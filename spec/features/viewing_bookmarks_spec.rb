@@ -2,7 +2,7 @@ require 'pg'
 
 feature 'Viewing bookmarks'do
   scenario 'A user can see bookmarks'do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
+    #connection = PG.connect(dbname: 'bookmark_manager_test')
     #Add the test data
     Bookmarks.create(url: "http://makersacademy.com")
     Bookmarks.create(url: "http://destroyallsoftware.com")
