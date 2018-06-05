@@ -11,3 +11,9 @@ I'd like to see a list of bookmarks.
 As a time-pressed user<br>
 So that I can save a website<br>
 I would like to add the site's address and title to bookmark manager
+
+##3rd User Story
+
+As a user<br>
+So that I can save a website for later<br>
+I want to be able to add a new bookmark to the Bookmark Manager
