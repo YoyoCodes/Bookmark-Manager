@@ -8,11 +8,6 @@ class BookmarkManager < Sinatra::Base
 
   get "/bookmarks" do
     @bookmarks = Bookmarks.all
-    # @bookmarks = [
-    #   "www.google.com,"
-    #   "www.reddit.com",
-    #   "www.twitter.com"
-    # ]
     erb :index
   end
 
