@@ -12,7 +12,6 @@ class BookmarkManager < Sinatra::Base
   end
 
   get "/bookmarks" do
-    p @flash = flash
     @bookmarks = Bookmarks.all
     erb :index
   end
