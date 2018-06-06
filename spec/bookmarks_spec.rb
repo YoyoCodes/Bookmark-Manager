@@ -5,9 +5,9 @@ describe Bookmarks do
     it "returns the bookmarks in the array" do
       #connection = PG.connect(dbname: 'bookmark_manager_test')
       #add the test data
-      Bookmarks.create(url: "http://makersacademy.com")
-      Bookmarks.create(url: "http://destroyallsoftware.com")
-      Bookmarks.create(url: "http://google.com")
+      Bookmarks.create("http://makersacademy.com")
+      Bookmarks.create("http://destroyallsoftware.com")
+      Bookmarks.create("http://google.com")
 
       expected_bookmarks = [
         'http://makersacademy.com',
@@ -21,9 +21,15 @@ describe Bookmarks do
 
   describe '.create' do
     it 'creates a new bookmark' do
-      Bookmarks.create(url: 'http://www.testbookmark.com')
+      Bookmarks.create('http://www.testbookmark.com')
 
       expect(Bookmarks.all).to include 'http://www.testbookmark.com'
+    end
+
+    it "does not create a new bookmark id the URL is not valid"do
+      Bookmarks.create('not a real bookmark')
+
+      expect(Bookmarks.all).not_to include 'not a real bookmark'
     end
   end
 end

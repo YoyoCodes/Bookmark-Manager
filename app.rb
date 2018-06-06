@@ -1,5 +1,6 @@
 require "sinatra/base"
 require 'sinatra/flash'
+require 'uri'
 require_relative "./lib/bookmarks"
 
 class BookmarkManager < Sinatra::Base
@@ -11,6 +12,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   get "/bookmarks" do
+    p @flash = flash
     @bookmarks = Bookmarks.all
     erb :index
   end
@@ -20,11 +22,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/bookmarks' do
-    if params['url'] =~ /\A#{URI::regexp(['http', 'https'])}\z/
-      Bookmarks.create(url: params['url'])
-    else
-       flash[:notice] = "You must submit a valid URL."
-    end
+    p flash[:invalid_notice] = "You must submit a valid URL." unless Bookmarks.create(params[:'link'])
     redirect '/bookmarks'
   end
 

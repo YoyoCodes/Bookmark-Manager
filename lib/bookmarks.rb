@@ -1,4 +1,5 @@
 require 'pg'
+require 'uri'
 
 class Bookmarks
   def self.all
@@ -12,13 +13,20 @@ class Bookmarks
     result.map { |bookmark| bookmark['url'] }
   end
 
-  def self.create(options)
+  def self.create(link)
+    return false unless is_url?(link)
     if ENV['ENVIRONMENT'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
     else
       connection = PG.connect(dbname: 'bookmark_manager')
     end
 
-    connection.exec("INSERT INTO bookmarks (url) VALUES('#{options[:url]}')")
+
+    connection.query("INSERT INTO bookmarks (url) VALUES('#{link}')")
+  end
+
+  private
+  def self.is_url?(url)
+    url =~ /\A#{URI::regexp(['http', 'https'])}\z/
   end
 end
